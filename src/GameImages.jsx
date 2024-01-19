@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gameData from './assets/Answer'; // Adjust the path as per your file structure
 
 const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
-    // Assuming gameData[0] has your initial images and GIFs
     const initialImagePaths = gameData[0].imagePaths;
     const hoverGifPaths = gameData[0].gifPaths;
-
-    // Path to your border image
     const borderImagePath = '/assets/GameImages/Center_CRT.png';
-
     const [hoveredIndex, setHoveredIndex] = useState(null);
-    const [gifReloadKey, setGifReloadKey] = useState(0); // State to force reload GIF
+
+    // Preload GIFs
+    useEffect(() => {
+        hoverGifPaths.forEach(gifPath => {
+            const img = new Image();
+            img.src = gifPath;
+        });
+    }, [hoverGifPaths]);
 
     const handleImageHover = (index) => {
         setHoveredIndex(index);
-        setGifReloadKey(prevKey => prevKey + 1); // Increment key to force reload
     };
 
     return (
@@ -67,7 +69,6 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                                         objectFit: 'contain',
                                         pointerEvents: 'none',
                                     }}
-                                    lazy="true" // Lazy load the GIF
                                 />
                             )}
                         </div>
