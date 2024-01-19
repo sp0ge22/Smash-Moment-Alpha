@@ -58,7 +58,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                             {hoveredIndex === index && (
                                 <img
                                     className='px-1 pb-12'
-                                    src={`${hoverGifPaths[index]}?reload=${gifReloadKey}`}
+                                    src={hoverGifPaths[index]}
                                     alt={`GIF ${index + 1}`}
                                     style={{
                                         position: 'absolute',
