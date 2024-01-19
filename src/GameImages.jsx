@@ -67,6 +67,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                                         objectFit: 'contain',
                                         pointerEvents: 'none',
                                     }}
+                                    lazy="true" // Lazy load the GIF
                                 />
                             )}
                         </div>
