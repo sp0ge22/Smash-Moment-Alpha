@@ -8,9 +8,9 @@ const gameData = [
             ],
 
             gifPaths: [
-                '/assets/GameImages/Daily-1.gif',
-                '/assets/GameImages/Daily-2.gif',
-                '/assets/GameImages/Daily-3.gif',
+                '/assets/GameImages/Daily-1-5mb.gif',
+                '/assets/GameImages/Daily-2-5mb.gif',
+                '/assets/GameImages/Daily-3-5mb.gif',
             ],
 
             
