@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    25%, 75% { opacity: 1; }
+}
+
+.fade-animation {
+    animation: fadeInOut 6s ease-in-out infinite;
+}
