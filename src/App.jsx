@@ -6,8 +6,8 @@ import TournamentGuess from './TournamentGuess';
 import Congrats from './Congrats';
 
 export default function App() {
-  const logoSrc = '/assets/GameImages/Moments_in_Melee.png';
-  const backgroundSrc = '/assets/GameImages/giphy.gif';
+  const logoSrc = '/assets/GameImages/AMIM-Header.png';
+  const backgroundSrc = '/assets/GameImages/background2.gif';
   const [isBothPlayerAnswersCorrect, setIsBothPlayerAnswersCorrect] = useState(null);
   const [GlobalTournamentAnswer, setGlobalTournamentAnswer] = useState(null);
 
@@ -25,7 +25,7 @@ export default function App() {
           />
         </div>
 
-        <div className='bg-black bg-opacity-50 rounded-2xl shadow-lg px-5'>
+        <div className='bg-black bg-opacity-50 rounded-2xl shadow-lg px-5 mt-5 mb-5'>
           <div className="mt-5 text-center">
             <h1 className="text-white text-2xl font-bold shadow-md">Which two players had this interaction?</h1>
           </div>
@@ -44,9 +44,9 @@ export default function App() {
         </div>
       </div>
 
-      <div className="h-12 flex justify-center w-full">
+      <div className="flex justify-center w-full h-16">
         {isBothPlayerAnswersCorrect && GlobalTournamentAnswer && (
-          <div className='font-custom text-white flex flex-col items-center justify-center mb-10'>
+          <div className='font-custom text-white flex flex-col items-center justify-center'>
             <Congrats 
               isBothPlayerAnswersCorrect={isBothPlayerAnswersCorrect}
               GlobalTournamentAnswer={GlobalTournamentAnswer}/>

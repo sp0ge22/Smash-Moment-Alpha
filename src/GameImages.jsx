@@ -3,24 +3,39 @@ import gameData from './assets/Answer'; // Adjust the path as per your file stru
 
 const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
     const initialImagePaths = gameData[0].imagePaths;
-    const hoverGifPaths = gameData[0].gifPaths;
+    const alternateGifPaths = [
+        '/assets/GameImages/hbox-popoff-1.gif', // Replace with the correct path
+        '/assets/GameImages/hbox-popoff-2.gif',
+        '/assets/GameImages/hbox-popoff-3.gif'
+    ];
+    
     const borderImagePath = '/assets/GameImages/Center_CRT.png';
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [gifPaths, setGifPaths] = useState(gameData[0].gifPaths);
+
+    // Update GIF paths based on conditions
+    useEffect(() => {
+        if (isBothPlayerAnswersCorrect || GlobalTournamentAnswer) {
+            setGifPaths(alternateGifPaths);
+        } else {
+            setGifPaths(gameData[0].gifPaths);
+        }
+    }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gameData]);
 
     // Preload GIFs
     useEffect(() => {
-        hoverGifPaths.forEach(gifPath => {
+        gifPaths.forEach(gifPath => {
             const img = new Image();
             img.src = gifPath;
         });
-    }, [hoverGifPaths]);
+    }, [gifPaths]);
 
     const handleImageHover = (index) => {
         setHoveredIndex(index);
     };
 
     return (
-        <div className="flex flex-col items-center bg-black bg-opacity-50">
+        <div className="flex flex-col items-center">
             <div className="flex justify-center">
                 {initialImagePaths.map((path, index) => (
                     <div
@@ -60,7 +75,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                             {hoveredIndex === index && (
                                 <img
                                     className='px-1 pb-12'
-                                    src={hoverGifPaths[index]}
+                                    src={gifPaths[index]}
                                     alt={`GIF ${index + 1}`}
                                     style={{
                                         position: 'absolute',
@@ -87,6 +102,6 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
             </div>
         </div>
     );
-}    
+}
 
 export default GameImages;
