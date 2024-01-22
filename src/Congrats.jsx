@@ -23,7 +23,7 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                 images.push(
                     <div
                         key={`text-${i}`}
-                        className="h-24 w-[600px] flex items-center justify-center" // Fixed height container
+                        className="w-[600px] flex items-center justify-center" // Fixed height container
                     >
                         <p className="text-center text-5xl">
                             {showText ? "You've Juan!" : "New Moments Daily"}
@@ -44,7 +44,7 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
     };
 
     return (
-        <div className="">
+        <div className="h-12">
             <div className="flex">
                 {renderImages()}
             </div>

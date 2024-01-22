@@ -44,7 +44,8 @@ export default function App() {
         </div>
       </div>
 
-      <div className="flex justify-center w-full h-16">
+      {/* Reserve space for the Congrats component */}
+      <div className="flex justify-center w-full" style={{ minHeight: '50px' }}>
         {isBothPlayerAnswersCorrect && GlobalTournamentAnswer && (
           <div className='font-custom text-white flex flex-col items-center justify-center'>
             <Congrats 

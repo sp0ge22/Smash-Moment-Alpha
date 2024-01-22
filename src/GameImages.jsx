@@ -72,7 +72,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                                     objectFit: 'contain'
                                 }}
                             />
-                            {hoveredIndex === index && (
+                            {(hoveredIndex === index || (isBothPlayerAnswersCorrect && GlobalTournamentAnswer)) && (
                                 <img
                                     className='px-1 pb-12'
                                     src={gifPaths[index]}
