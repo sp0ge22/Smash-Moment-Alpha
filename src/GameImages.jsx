@@ -80,7 +80,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                                     style={{
                                         position: 'absolute',
                                         maxWidth: '90%', 
-                                        maxHeight: '90%', 
+                                        maxHeight: '100%', 
                                         objectFit: 'contain',
                                         pointerEvents: 'none',
                                     }}

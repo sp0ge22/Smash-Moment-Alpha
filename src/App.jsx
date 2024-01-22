@@ -6,15 +6,15 @@ import TournamentGuess from './TournamentGuess';
 import Congrats from './Congrats';
 
 export default function App() {
-  const logoSrc = '/assets/GameImages/AMIM-Header.png';
+  const logoSrc = '/assets/GameImages/AMIM-Header.gif';
   const backgroundSrc = '/assets/GameImages/background2.gif';
   const [isBothPlayerAnswersCorrect, setIsBothPlayerAnswersCorrect] = useState(null);
   const [GlobalTournamentAnswer, setGlobalTournamentAnswer] = useState(null);
 
   return (
-    <div className="h-screen mx-auto flex flex-col items-center justify-center pb-14" style={{ backgroundImage: `url(${backgroundSrc})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
+    <div className="h-screen mx-auto flex flex-col items-center justify-center pb-10" style={{ backgroundImage: `url(${backgroundSrc})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
       <header className="">
-        <img src={logoSrc} alt="Melee Logo" className="mx-auto" style={{ width: '100%' }} />
+        <img src={logoSrc} alt="Melee Logo" className="mx-auto" style={{ width: '50%' }} />
       </header>
 
       <div className="flex flex-col items-center justify-start"> {/* Add 'justify-start' class */}
