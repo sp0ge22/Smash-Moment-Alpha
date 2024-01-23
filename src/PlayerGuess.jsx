@@ -42,6 +42,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const handlePlayerInputChangeOne = (event) => {
         if (!isPlayerAnswerOneCorrect) {
             setPlayerInputOne(event.target.value);
+            setSelectedPlayerAnswerOne(''); // Clear the selected player answer
             setShowPlayerListOne(true);
         }
     };
@@ -49,6 +50,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const handlePlayerInputChangeTwo = (event) => {
         if (!isPlayerAnswerTwoCorrect) {
             setPlayerInputTwo(event.target.value);
+            setSelectedPlayerAnswerTwo(''); // Clear the selected player answer
             setShowPlayerListTwo(true);
         }
     };
@@ -67,9 +69,11 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
 
     const submitPlayerGuess = async () => {
         let answerOneCorrect = false, answerTwoCorrect = false;
+        const lowerCasePlayerAnswers = playerAnswers.map(answer => answer.toLowerCase());
     
-        // Check first answer
-        if (playerAnswers.includes(selectedPlayerAnswerOne)) {
+        // Check first answer (either typed or selected)
+        const finalAnswerOne = selectedPlayerAnswerOne.toLowerCase() || playerInputOne.toLowerCase();
+        if (lowerCasePlayerAnswers.includes(finalAnswerOne)) {
             setIsPlayerAnswerOneCorrect(true);
             answerOneCorrect = true;
         } else {
@@ -81,8 +85,9 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
         // Wait for the first sound to play and 0.5 second delay
         await new Promise(resolve => setTimeout(resolve, 500));
     
-        // Check second answer
-        if (playerAnswers.includes(selectedPlayerAnswerTwo)) {
+        // Check second answer (either typed or selected)
+        const finalAnswerTwo = selectedPlayerAnswerTwo.toLowerCase() || playerInputTwo.toLowerCase();
+        if (lowerCasePlayerAnswers.includes(finalAnswerTwo)) {
             setIsPlayerAnswerTwoCorrect(true);
             answerTwoCorrect = true;
         } else {

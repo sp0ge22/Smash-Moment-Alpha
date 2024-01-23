@@ -15,11 +15,11 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
 
     // Update GIF paths based on conditions
     useEffect(() => {
-        if (isBothPlayerAnswersCorrect || GlobalTournamentAnswer) {
+        if (isBothPlayerAnswersCorrect && GlobalTournamentAnswer) { // BEGIN: Updated condition
             setGifPaths(alternateGifPaths);
         } else {
             setGifPaths(gameData[0].gifPaths);
-        }
+        } // END: Updated condition
     }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gameData]);
 
     // Preload GIFs

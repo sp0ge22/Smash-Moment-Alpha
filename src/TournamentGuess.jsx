@@ -39,6 +39,7 @@ const Tournament = ({ setGlobalTournamentAnswer }) => {
         if (!isTournamentAnswerCorrect) {
             setTournamentInput(event.target.value);
             setShowTournamentList(event.target.value.length > 0); // Show list only if input is not empty
+            setSelectedTournament(''); // Clear the selected tournament when the user types
         }
     };
 
@@ -49,16 +50,18 @@ const Tournament = ({ setGlobalTournamentAnswer }) => {
     };
 
     const submitTournamentGuess = async () => {
-        if (tournamentAnswer === selectedTournament) {
+        const answer = selectedTournament || tournamentInput; // Use selectedTournament if it's set, otherwise use tournamentInput
+    
+        if (tournamentAnswer.toLowerCase() === answer.toLowerCase()) { // Compare answers in lowercase
             if (!isTournamentAnswerCorrect) {
                 const audio = new Audio('/assets/GameSounds/fox-shine.wav');
                 audio.play();
-                await new Promise(resolve => setTimeout(resolve, 200)); // Wait 1 second
+                await new Promise(resolve => setTimeout(resolve, 200)); // Wait 200 milliseconds
                 audio.play();
             }
             setIsTournamentAnswerCorrect(true);
             setGlobalTournamentAnswer(true); // Set GlobalTournamentAnswer to true
-            console.log(`Correct! The answer was: ${selectedTournament}`);
+            console.log(`Correct! The answer was: ${answer}`);
         } else {
             setAnimationKey(prevKey => prevKey + 1);
             setIsTournamentAnswerCorrect(false);
@@ -83,7 +86,7 @@ const Tournament = ({ setGlobalTournamentAnswer }) => {
                             type="text"
                             value={tournamentInput}
                             onChange={handleTournamentInputChange}
-                            placeholder="Type to filter tournaments"
+                            placeholder="Type to filter tournaments or enter a name"
                             className={`text-black rounded p-2 ${isTournamentAnswerCorrect ? 'bg-green-200' : 'bg-white'} w-full ${isTournamentAnswerCorrect === false ? 'animate-buzz' : ''}`}
                             readOnly={isTournamentAnswerCorrect}
                             ref={inputRef}
