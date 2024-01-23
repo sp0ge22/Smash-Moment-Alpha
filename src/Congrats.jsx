@@ -18,8 +18,8 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
 
     const renderImages = () => {
         const images = [];
-        for (let i = 0; i < 16; i++) {
-            if (i === 8) {
+        for (let i = 0; i < 10; i++) {
+            if (i === 5) {
                 images.push(
                     <div
                         key={`text-${i}`}
@@ -31,12 +31,13 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                     </div>
                 );
             }
+            const isInverse = i >= 5; // Check if it's the second half of the images
             images.push(
                 <img
                     key={i}
-                    src="/assets/GameImages/fox-waveshine.gif"
+                    src="/assets/GameImages/fox-laser.gif"
                     alt="fox-wave"
-                    className="w-20 h-20"
+                    className={`w-20 h-20 ${isInverse ? 'transform scale-x-[-1]' : ''}`}
                 />
             );
         }
