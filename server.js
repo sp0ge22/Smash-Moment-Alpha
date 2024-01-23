@@ -28,11 +28,13 @@ async function connectToMongoDB() {
   }
 }
 
+connectToMongoDB(); // Call the function to connect to MongoDB
+
 // Assuming you have a "quizzes" collection in your database
 app.get('/getCount', async (req, res) => {
   try {
     const quizCollection = client.db("smash-db").collection("quizzes");
-    const quiz = await quizCollection.findOne({});
+    const quiz = await quizCollection.findOne({ questionId: 'specific_question_id' });
     console.log("GET /getCount request successful");
     res.json(quiz ? quiz.correctAnswers : 0);
   } catch (error) {
@@ -42,25 +44,24 @@ app.get('/getCount', async (req, res) => {
 
 app.post('/incrementCount', async (req, res) => {
   try {
-    const result = await Quiz.findOneAndUpdate(
+    const quizCollection = client.db("smash-db").collection("quizzes");
+    const result = await quizCollection.findOneAndUpdate(
       { questionId: 'specific_question_id' },
       { $inc: { correctAnswers: 1 } },
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     );
 
-    if (!result) {
-      return res.status(404).json({ message: "Document not found" });
+    if (result && result.value) {
+      res.json(result.value.correctAnswers);
+    } else {
+      res.status(404).json({ message: "Document not found" });
     }
-
-    res.json(result.correctAnswers);
   } catch (error) {
     console.error('Error in incrementCount:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
-const port = process.env.PORT || 3001;
-
-connectToMongoDB().then(() => {
-  app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });

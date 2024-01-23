@@ -21,7 +21,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
 
     const updateDatabase = async () => {
         try {
-          const response = await fetch('http://localhost:3001/incrementCount', {
+          const response = await fetch('http://localhost:3000/incrementCount', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const incrementCorrectAnswers = async () => {
         console.log('incrementCorrectAnswers called');
         try {
-            const response = await fetch('http://localhost:3001/incrementCount', {
+            const response = await fetch('http://localhost:3000/incrementCount', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
