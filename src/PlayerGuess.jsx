@@ -36,19 +36,11 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
           console.error('Error making the update request:', error);
         }
       };
-    
-    useEffect(() => {
-        if (isPlayerAnswerOneCorrect && isPlayerAnswerTwoCorrect) {
-            // Call the function to update the database
-            updateDatabase();
-        }
-        // You can add other conditions or states as dependencies if needed
-    }, [isPlayerAnswerOneCorrect, isPlayerAnswerTwoCorrect]);
-
-    const incrementCorrectAnswers = async () => {
+      
+      const incrementCorrectAnswers = async () => {
         console.log('incrementCorrectAnswers called');
         try {
-            const response = await fetch('http://localhost:3000/incrementCount', {
+          const response = await fetch('http://localhost:3000/incrementCount', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -60,6 +52,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
           console.error('Error:', error);
         }
       };
+      
       
 
     useEffect(() => {
@@ -113,41 +106,40 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const submitPlayerGuess = async () => {
         let answerOneCorrect = false, answerTwoCorrect = false;
         const lowerCasePlayerAnswers = playerAnswers.map(answer => answer.toLowerCase());
-      
+
         // Check first answer (either typed or selected)
         const finalAnswerOne = selectedPlayerAnswerOne.toLowerCase() || playerInputOne.toLowerCase();
         if (lowerCasePlayerAnswers.includes(finalAnswerOne)) {
-          setIsPlayerAnswerOneCorrect(true);
-          answerOneCorrect = true;
+            setIsPlayerAnswerOneCorrect(true);
+            answerOneCorrect = true;
         } else {
-          setAnimationKeyOne(prevKey => prevKey + 1);
-          setIsPlayerAnswerOneCorrect(false);
-          setWrongAttemptOne(prev => prev + 1);
+            setAnimationKeyOne(prevKey => prevKey + 1);
+            setIsPlayerAnswerOneCorrect(false);
+            setWrongAttemptOne(prev => prev + 1);
         }
-      
+
         // Wait for the first sound to play and 0.5 second delay
         await new Promise(resolve => setTimeout(resolve, 500));
-      
+
         // Check second answer (either typed or selected)
         const finalAnswerTwo = selectedPlayerAnswerTwo.toLowerCase() || playerInputTwo.toLowerCase();
         if (lowerCasePlayerAnswers.includes(finalAnswerTwo)) {
-          setIsPlayerAnswerTwoCorrect(true);
-          answerTwoCorrect = true;
+            setIsPlayerAnswerTwoCorrect(true);
+            answerTwoCorrect = true;
         } else {
-          setAnimationKeyTwo(prevKey => prevKey + 1);
-          setIsPlayerAnswerTwoCorrect(false);
-          setWrongAttemptTwo(prev => prev + 1);
+            setAnimationKeyTwo(prevKey => prevKey + 1);
+            setIsPlayerAnswerTwoCorrect(false);
+            setWrongAttemptTwo(prev => prev + 1);
         }
-      
+
         // Update the isBothPlayerAnswersCorrect state using the prop from App
         setIsBothPlayerAnswersCorrect(answerOneCorrect && answerTwoCorrect);
-      
+
         // Check if both answers are correct and then update the database
-        if (answerOneCorrect && answerTwoCorrect) {
-          await incrementCorrectAnswers(); // Update the database
+        if (answerOneCorrect && answerTwoCorrect && !isPlayerAnswerOneCorrect && !isPlayerAnswerTwoCorrect) {
+            await incrementCorrectAnswers(); // Update the database
         }
-      };
-      
+    };
     
     const filteredPlayersOne = playerInputOne
         ? Players.filter(player =>

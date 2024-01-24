@@ -2,36 +2,52 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
-    const [showText, setShowText] = useState(true);
+    const [showText, setShowText] = useState(1); // Changed to number, 1 for first message, 2 for second, 3 for third
     const [startAnimation, setStartAnimation] = useState(false);
+    const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
     useEffect(() => {
         if (isBothPlayerAnswersCorrect && GlobalTournamentAnswer) {
             setStartAnimation(true);
             const interval = setInterval(() => {
-                setShowText(prev => !prev); // Toggle the state
-            }, 3500); // Total of 1.5s fade out, 3s display, and 1.5s fade in
+                setShowText(prev => (prev % 3) + 1); // Cycle through 1, 2, 3
+            }, 3500);
 
-            return () => clearInterval(interval); // Clean up the interval
+            fetch('http://localhost:3000/getCount')
+                .then(response => response.json())
+                .then(data => setCorrectAnswersCount(data))
+                .catch(error => console.error('Error fetching count:', error));
+
+            return () => clearInterval(interval);
         }
     }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer]);
+
+    const getMessage = () => {
+        switch (showText) {
+            case 1:
+                return "You've Juan";
+            case 2:
+                return `${correctAnswersCount} people have Juan today!`;
+            case 3:
+                return "New Moments (Coming Soon)";
+            default:
+                return "";
+        }
+    };
 
     const renderImages = () => {
         const images = [];
         for (let i = 0; i < 10; i++) {
             if (i === 5) {
                 images.push(
-                    <div
-                        key={`text-${i}`}
-                        className="w-[600px] flex items-center justify-center" // Fixed height container
-                    >
+                    <div key={`text-${i}`} className="w-[600px] flex items-center justify-center">
                         <p className="text-center text-5xl">
-                            {showText ? "You've Juan!" : "New Moments Daily"}
+                            {getMessage()}
                         </p>
                     </div>
                 );
             }
-            const isInverse = i >= 5; // Check if it's the second half of the images
+            const isInverse = i >= 5;
             images.push(
                 <img
                     key={i}

@@ -34,9 +34,15 @@ connectToMongoDB(); // Call the function to connect to MongoDB
 app.get('/getCount', async (req, res) => {
   try {
     const quizCollection = client.db("smash-db").collection("quizzes");
-    const quiz = await quizCollection.findOne({ questionId: 'specific_question_id' });
-    console.log("GET /getCount request successful");
-    res.json(quiz ? quiz.correctAnswers : 0);
+    // Assuming there is only one document and you want to retrieve the correctAnswers field
+    const quizDocument = await quizCollection.findOne();
+
+    if (quizDocument) {
+      console.log("GET /getCount request successful");
+      res.json(quizDocument.correctAnswers); // Send the correctAnswers field
+    } else {
+      res.status(404).json({ message: "Quiz document not found" });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -45,22 +51,21 @@ app.get('/getCount', async (req, res) => {
 app.post('/incrementCount', async (req, res) => {
   try {
     const quizCollection = client.db("smash-db").collection("quizzes");
-    const result = await quizCollection.findOneAndUpdate(
-      { questionId: 'specific_question_id' },
-      { $inc: { correctAnswers: 1 } },
-      { returnDocument: 'after', upsert: true }
-    );
+    
+    // Incrementing the count for all quizzes
+    const result = await quizCollection.updateMany({}, { $inc: { correctAnswers: 1 } });
 
-    if (result && result.value) {
-      res.json(result.value.correctAnswers);
+    if (result && result.modifiedCount > 0) {
+      res.json("Count incremented successfully");
     } else {
-      res.status(404).json({ message: "Document not found" });
+      res.status(404).json({ message: "No quizzes found" });
     }
   } catch (error) {
     console.error('Error in incrementCount:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
