@@ -13,7 +13,7 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                 setShowText(prev => (prev % 3) + 1); // Cycle through 1, 2, 3
             }, 3500);
 
-            fetch('http://localhost:3000/getCount')
+            fetch('https://localhost:3000/getCount')
                 .then(response => response.json())
                 .then(data => setCorrectAnswersCount(data))
                 .catch(error => console.error('Error fetching count:', error));

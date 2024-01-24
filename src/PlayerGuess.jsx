@@ -19,41 +19,21 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const playerListOneRef = useRef(null);
     const playerListTwoRef = useRef(null);
 
-    const updateDatabase = async () => {
-        try {
-          const response = await fetch('http://localhost:3000/incrementCount', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              // Include any necessary data here
-            }),
-          });
-          const data = await response.json();
-          console.log('Response from server:', data);
-        } catch (error) {
-          console.error('Error making the update request:', error);
-        }
-      };
-      
-      const incrementCorrectAnswers = async () => {
-        console.log('incrementCorrectAnswers called');
-        try {
-          const response = await fetch('http://localhost:3000/incrementCount', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          const data = await response.json();
-          console.log('Updated correct answers count:', data);
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
-      
-      
+const incrementCorrectAnswers = async () => {
+  console.log('incrementCorrectAnswers called');
+  try {
+    const response = await fetch('http://localhost:3000/incrementCount', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log('Updated correct answers count:', data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
     useEffect(() => {
         if (isPlayerAnswerOneCorrect === true) {
