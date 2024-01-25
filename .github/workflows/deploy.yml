@@ -23,6 +23,8 @@ jobs:
 
       - name: Deploy to DigitalOcean
         run: |
-          eval $(ssh-agent -s)
-          ssh-add <(echo "SHA256:fKFtGpiB+j4+XfQM8g6uKinpF6toPi8U20wPMSaw+Fg")
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 159.65.255.38 >> ~/.ssh/known_hosts
           ssh root@159.65.255.38 'cd Smash-Moment-Alpha/ && git pull origin main && npm install && pm2 restart server.js'
