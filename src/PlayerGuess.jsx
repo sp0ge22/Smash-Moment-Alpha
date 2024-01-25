@@ -22,7 +22,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
 const incrementCorrectAnswers = async () => {
   console.log('incrementCorrectAnswers called');
   try {
-    const response = await fetch('https://a-moment-in-melee.io/incrementCount', {
+    const response = await fetch('http://159.65.255.38:80/incrementCount', {
         method: 'POST',
       headers: {
         'Content-Type': 'application/json',
