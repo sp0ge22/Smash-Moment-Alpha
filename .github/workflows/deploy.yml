@@ -21,9 +21,15 @@ jobs:
       - name: Print SSH_PRIVATE_KEY
         run: echo "SSH_PRIVATE_KEY is ${{ secrets.SSH_PRIVATE_KEY }}"
 
-      - name: Verify Host Key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          ssh root@159.65.255.38 "echo 'hello'"
+      - name: Deploy to DigitalOcean
+        uses: appleboy/ssh-action@master
+        with:
+          host: 159.65.255.38
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Store your private key as a secret in GitHub
+          script: |
+            cd Smash-Moment-Alpha/
+            git pull origin main
+            npm install
+            pm2 start -f server.js
         
