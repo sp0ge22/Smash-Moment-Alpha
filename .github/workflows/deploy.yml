@@ -22,6 +22,8 @@ jobs:
         run: echo "SSH_PRIVATE_KEY is ${{ secrets.SSH_PRIVATE_KEY }}"
 
       - name: Verify Host Key
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: ssh -o "StrictHostKeyChecking accept-new" root@159.65.255.38 "echo 'SSH connection successful'"
       # - name: Deploy to DigitalOcean
       #   env:
