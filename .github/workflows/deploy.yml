@@ -17,10 +17,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20'
-
-      - name: Print All Secrets
-        run: |
-          env | grep SECRET
           
       - name: Print SSH_PRIVATE_KEY
         run: echo "SSH_PRIVATE_KEY is ${{ secrets.SSH_PRIVATE_KEY }}"
