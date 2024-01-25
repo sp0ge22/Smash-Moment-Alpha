@@ -23,11 +23,7 @@ jobs:
 
       - name: Verify Host Key
         env:
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: ssh -o "StrictHostKeyChecking accept-new" root@159.65.255.38 "echo 'SSH connection successful'"
-      # - name: Deploy to DigitalOcean
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #   run: |
-      #     ssh root@159.65.255.38 'cd Smash-Moment-Alpha/ && git pull origin main && npm install && pm2 restart server.js'
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          ssh root@159.65.255.38 "echo 'hello'"
         
