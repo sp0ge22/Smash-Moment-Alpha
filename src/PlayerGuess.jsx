@@ -22,7 +22,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
 const incrementCorrectAnswers = async () => {
   console.log('incrementCorrectAnswers called');
   try {
-    const response = await fetch('http://159.65.255.38:80/incrementCount', {
+    const response = await fetch('http://159.65.255.38:3000/incrementCount', {
         method: 'POST',
       headers: {
         'Content-Type': 'application/json',
