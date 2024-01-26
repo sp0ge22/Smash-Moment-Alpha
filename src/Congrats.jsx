@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
 const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
     const [showText, setShowText] = useState(1); // Changed to number, 1 for first message, 2 for second, 3 for third
     const [startAnimation, setStartAnimation] = useState(false);
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-
+    // const backendURL = process.env.REACT_APP_BACKEND_URL
     useEffect(() => {
         if (isBothPlayerAnswersCorrect && GlobalTournamentAnswer) {
             setStartAnimation(true);
@@ -13,7 +12,7 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                 setShowText(prev => (prev % 3) + 1); // Cycle through 1, 2, 3
             }, 3500);
 
-            fetch('http://159.65.255.38:3000/getCount')
+            fetch( `${import.meta.env.VITE_BACKEND_URL}getCount`)
                 .then(response => response.json())
                 .then(data => setCorrectAnswersCount(data))
                 .catch(error => console.error('Error fetching count:', error));

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Players from './assets/Players';
 import gameData from './assets/Answer';
-
 const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const [playerInputOne, setPlayerInputOne] = useState('');
     const [playerInputTwo, setPlayerInputTwo] = useState('');
@@ -22,7 +21,8 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
 const incrementCorrectAnswers = async () => {
   console.log('incrementCorrectAnswers called');
   try {
-    const response = await fetch('http://159.65.255.38:3000/incrementCount', {
+    // const backendURL = process.env.REACT_APP_BACKEND_URL
+    const response = await fetch( `${import.meta.env.VITE_BACKEND_URL}incrementCount`, {
         method: 'POST',
       headers: {
         'Content-Type': 'application/json',
