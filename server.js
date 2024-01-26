@@ -30,6 +30,10 @@ async function connectToMongoDB() {
 
 connectToMongoDB(); // Call the function to connect to MongoDB
 
+app.get('/', async (req, res) => {
+  res.status(200).json({ message: "Hello" });
+}
+)
 // Assuming you have a "quizzes" collection in your database
 app.get('/getCount', async (req, res) => {
   try {
