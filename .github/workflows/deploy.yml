@@ -31,5 +31,5 @@ jobs:
             cd Smash-Moment-Alpha/
             git pull origin main
             npm install
-            pm2 start -f server.js
+            # pm2 start -f server.js
         
