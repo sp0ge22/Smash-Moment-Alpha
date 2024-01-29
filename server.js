@@ -31,12 +31,14 @@ async function connectToMongoDB() {
 connectToMongoDB(); // Call the function to connect to MongoDB
 
 app.get('/', async (req, res) => {
+  console.log("Success!")
   res.status(200).json({ message: "Hello" });
 }
 )
 // Assuming you have a "quizzes" collection in your database
 app.get('/getCount', async (req, res) => {
   try {
+    console.log("GetCount Success!")
     const quizCollection = client.db("smash-db").collection("quizzes");
     // Assuming there is only one document and you want to retrieve the correctAnswers field
     const quizDocument = await quizCollection.findOne();
@@ -54,6 +56,7 @@ app.get('/getCount', async (req, res) => {
 
 app.post('/incrementCount', async (req, res) => {
   try {
+    console.log("Increment Success!")
     const quizCollection = client.db("smash-db").collection("quizzes");
     
     // Incrementing the count for all quizzes
