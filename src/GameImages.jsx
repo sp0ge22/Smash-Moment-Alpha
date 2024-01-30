@@ -9,7 +9,11 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
         '/assets/GameImages/hbox-popoff-3.gif'
     ];
     
-    const borderImagePath = '/assets/GameImages/Center_CRT.png';
+    const borderImagePath = {
+        0: '/assets/GameImages/Left_CRT.png',
+        1: '/assets/GameImages/Center_CRT.png',
+        2: '/assets/GameImages/Right_CRT.png'
+    };
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [gifPaths, setGifPaths] = useState(gameData[0].gifPaths);
 
@@ -88,7 +92,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                             )}
                         </div>
                         <img
-                            src={borderImagePath}
+                            src={borderImagePath[index]}
                             alt="Border"
                             style={{
                                 position: 'absolute',
