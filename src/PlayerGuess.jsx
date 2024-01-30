@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Players from './assets/Players';
 import gameData from './assets/Answer';
+import { database } from './firebase'; // Make sure this path is correct
+import { ref, runTransaction } from 'firebase/database';
 
 const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const [playerInputOne, setPlayerInputOne] = useState('');
@@ -19,21 +21,25 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const playerListOneRef = useRef(null);
     const playerListTwoRef = useRef(null);
 
-const incrementCorrectAnswers = async () => {
-  console.log('incrementCorrectAnswers called');
-  try {
-    const response = await fetch('http://159.65.255.38:3000/incrementCount', {
-        method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
-    console.log('Updated correct answers count:', data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+    const incrementCorrectAnswers = async () => {
+        const countRef = ref(database, 'game/correctAnswersCount'); // Adjust this path as per your database structure
+    
+        try {
+            // Begin a transaction to read and write data atomically
+            await runTransaction(countRef, (currentValue) => {
+                // If it's the first time, the count might not exist, so we start from 0
+                if (currentValue === null) {
+                    return 1;
+                } else {
+                    return currentValue + 1;
+                }
+            });
+            console.log("Correct answers count incremented successfully.");
+        } catch (error) {
+            console.error('Error incrementing correct answers count: ', error);
+        }
+    };
+
 
     useEffect(() => {
         if (isPlayerAnswerOneCorrect === true) {
@@ -86,8 +92,8 @@ const incrementCorrectAnswers = async () => {
     const submitPlayerGuess = async () => {
         let answerOneCorrect = false, answerTwoCorrect = false;
         const lowerCasePlayerAnswers = playerAnswers.map(answer => answer.toLowerCase());
-
-        // Check first answer (either typed or selected)
+    
+        // Check first answer
         const finalAnswerOne = selectedPlayerAnswerOne.toLowerCase() || playerInputOne.toLowerCase();
         if (lowerCasePlayerAnswers.includes(finalAnswerOne)) {
             setIsPlayerAnswerOneCorrect(true);
@@ -97,11 +103,11 @@ const incrementCorrectAnswers = async () => {
             setIsPlayerAnswerOneCorrect(false);
             setWrongAttemptOne(prev => prev + 1);
         }
-
+    
         // Wait for the first sound to play and 0.5 second delay
         await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Check second answer (either typed or selected)
+    
+        // Check second answer
         const finalAnswerTwo = selectedPlayerAnswerTwo.toLowerCase() || playerInputTwo.toLowerCase();
         if (lowerCasePlayerAnswers.includes(finalAnswerTwo)) {
             setIsPlayerAnswerTwoCorrect(true);
@@ -111,13 +117,13 @@ const incrementCorrectAnswers = async () => {
             setIsPlayerAnswerTwoCorrect(false);
             setWrongAttemptTwo(prev => prev + 1);
         }
-
-        // Update the isBothPlayerAnswersCorrect state using the prop from App
+    
+        // Update the isBothPlayerAnswersCorrect state
         setIsBothPlayerAnswersCorrect(answerOneCorrect && answerTwoCorrect);
-
-        // Check if both answers are correct and then update the database
-        if (answerOneCorrect && answerTwoCorrect && !isPlayerAnswerOneCorrect && !isPlayerAnswerTwoCorrect) {
-            await incrementCorrectAnswers(); // Update the database
+    
+        // Check if both answers are correct, then update the database
+        if (answerOneCorrect && answerTwoCorrect) {
+            await incrementCorrectAnswers(); // Call this function to update the database
         }
     };
     

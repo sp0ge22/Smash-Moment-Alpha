@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { ref, onValue } from 'firebase/database';
+import { database } from './firebase'; // Assuming this is the correct path to your Firebase configuration
+
 
 const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
     const [showText, setShowText] = useState(1); // Changed to number, 1 for first message, 2 for second, 3 for third
@@ -12,15 +15,26 @@ const Congrats = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
             const interval = setInterval(() => {
                 setShowText(prev => (prev % 3) + 1); // Cycle through 1, 2, 3
             }, 3500);
-
-            fetch('http://159.65.255.38:3000/getCount')
-                .then(response => response.json())
-                .then(data => setCorrectAnswersCount(data))
-                .catch(error => console.error('Error fetching count:', error));
-
-            return () => clearInterval(interval);
+    
+            const countRef = ref(database, 'game/correctAnswersCount'); // Adjust this path as per your database structure
+            const unsubscribe = onValue(countRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data !== null) {
+                    setCorrectAnswersCount(data);
+                } else {
+                    console.log("No correct answers count found!");
+                }
+            }, (error) => {
+                console.error('Error fetching correct answers count:', error);
+            });
+    
+            return () => {
+                clearInterval(interval);
+                unsubscribe(); // Unsubscribe from Firebase updates when component unmounts
+            };
         }
     }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer]);
+    
 
     const getMessage = () => {
         switch (showText) {
