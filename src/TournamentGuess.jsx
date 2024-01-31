@@ -86,7 +86,7 @@ const Tournament = ({ setGlobalTournamentAnswer }) => {
                             type="text"
                             value={tournamentInput}
                             onChange={handleTournamentInputChange}
-                            placeholder="Type to filter tournaments or enter a name"
+                            placeholder="Type to filter tournaments"
                             className={`text-black rounded p-2 ${isTournamentAnswerCorrect ? 'bg-green-200' : 'bg-white'} w-full ${isTournamentAnswerCorrect === false ? 'animate-buzz' : ''}`}
                             readOnly={isTournamentAnswerCorrect}
                             ref={inputRef}

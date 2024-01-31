@@ -20,6 +20,8 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const [wrongAttemptTwo, setWrongAttemptTwo] = useState(0);
     const playerListOneRef = useRef(null);
     const playerListTwoRef = useRef(null);
+    const [isSubmissionProcessed, setIsSubmissionProcessed] = useState(false);
+
 
     const incrementCorrectAnswers = async () => {
         const countRef = ref(database, 'game/correctAnswersCount'); // Adjust this path as per your database structure
@@ -90,6 +92,12 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     };
 
     const submitPlayerGuess = async () => {
+        if (isSubmissionProcessed) {
+            // If the submission has already been processed, exit the function to prevent further processing
+            console.log("Submission already processed");
+            return;
+        }
+    
         let answerOneCorrect = false, answerTwoCorrect = false;
         const lowerCasePlayerAnswers = playerAnswers.map(answer => answer.toLowerCase());
     
@@ -124,6 +132,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
         // Check if both answers are correct, then update the database
         if (answerOneCorrect && answerTwoCorrect) {
             await incrementCorrectAnswers(); // Call this function to update the database
+            setIsSubmissionProcessed(true); // Set the flag to true as the submission is processed
         }
     };
     
@@ -174,7 +183,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
                         type="text"
                         value={playerInputOne}
                         onChange={handlePlayerInputChangeOne}
-                        placeholder="Type to filter answers"
+                        placeholder="Type to search for players"
                         className={`text-black rounded p-2 ${isPlayerAnswerOneCorrect ? 'bg-green-200' : 'bg-white'} ${isPlayerAnswerOneCorrect === false ? 'animate-buzz' : ''}`}
                         readOnly={isPlayerAnswerOneCorrect}
                     />
@@ -205,7 +214,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
                         type="text"
                         value={playerInputTwo}
                         onChange={handlePlayerInputChangeTwo}
-                        placeholder="Type your guess"
+                        placeholder="Type to search for players"
                         className={`text-black rounded p-2 ${isPlayerAnswerTwoCorrect ? 'bg-green-200' : 'bg-white'} ${isPlayerAnswerTwoCorrect === false ? 'animate-buzz' : ''}`}
                         readOnly={isPlayerAnswerTwoCorrect}
                     />

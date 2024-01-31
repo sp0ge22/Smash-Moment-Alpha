@@ -32,7 +32,7 @@ export default function App() {
               />
             </div>
 
-            <div className='bg-black bg-opacity-50 rounded-2xl shadow-lg px-5 mt-5 mb-5'>
+            <div className='bg-black bg-opacity-50 rounded-2xl shadow-lg px-5 mt-0 mb-5'>
               <div className="mt-5 text-center">
                 <h1 className="text-white text-2xl font-bold shadow-md">Which two players had this interaction?</h1>
               </div>
@@ -42,7 +42,7 @@ export default function App() {
               </div>
 
               <div className="mt-5 text-center">
-                <h1 className="text-white text-2xl font-bold shadow-lg">Which tournament was this interaction?</h1>
+                <h1 className="text-white text-2xl font-bold shadow-lg">At which tournament series was this interaction?</h1>
               </div>
 
               <div className='pb-10'>
