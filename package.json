@@ -10,7 +10,6 @@
     "deploy": "gh-pages -d build",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "start": "node server.js",
     "start": "serve -s build",
     "preview": "vite preview"
   },
