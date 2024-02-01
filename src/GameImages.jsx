@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import gameData from './assets/Answer'; // Adjust the path as per your file structure
 
-const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
-    const initialImagePaths = gameData[0].imagePaths;
+const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gifPaths, currentIndex }) => {
     const alternateGifPaths = [
-        '/assets/GameImages/hbox-popoff-1.gif', // Replace with the correct path
+        '/assets/GameImages/hbox-popoff-1.gif',
         '/assets/GameImages/hbox-popoff-2.gif',
         '/assets/GameImages/hbox-popoff-3.gif'
     ];
-    
+
     const borderImagePath = {
         0: '/assets/GameImages/Left_CRT.png',
         1: '/assets/GameImages/Center_CRT.png',
         2: '/assets/GameImages/Right_CRT.png'
     };
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-    const [gifPaths, setGifPaths] = useState(gameData[0].gifPaths);
 
-    // Update GIF paths based on conditions
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [localGifPaths, setLocalGifPaths] = useState(gifPaths); // Local state for gif paths
+
+    // Update local GIF paths based on conditions
     useEffect(() => {
-        if (isBothPlayerAnswersCorrect && GlobalTournamentAnswer) { // BEGIN: Updated condition
-            setGifPaths(alternateGifPaths);
+        if (isBothPlayerAnswersCorrect && GlobalTournamentAnswer) {
+            setLocalGifPaths(alternateGifPaths);
         } else {
-            setGifPaths(gameData[0].gifPaths);
-        } // END: Updated condition
-    }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gameData]);
+            setLocalGifPaths(gameData[currentIndex].gifPaths);
+        }
+    }, [isBothPlayerAnswersCorrect, GlobalTournamentAnswer, currentIndex, gifPaths]);
 
     // Preload GIFs
     useEffect(() => {
-        gifPaths.forEach(gifPath => {
+        localGifPaths.forEach(gifPath => {
             const img = new Image();
             img.src = gifPath;
         });
-    }, [gifPaths]);
+    }, [localGifPaths]);
 
     const handleImageHover = (index) => {
         setHoveredIndex(index);
@@ -41,7 +41,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
     return (
         <div className="flex flex-col items-center">
             <div className="flex justify-center">
-                {initialImagePaths.map((path, index) => (
+                {gameData[currentIndex].imagePaths.map((path, index) => (
                     <div
                         key={index}
                         className="image-with-border"
@@ -79,7 +79,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer }) => {
                             {(hoveredIndex === index || (isBothPlayerAnswersCorrect && GlobalTournamentAnswer)) && (
                                 <img
                                     className='px-1 pb-12'
-                                    src={gifPaths[index]}
+                                    src={localGifPaths[index]}
                                     alt={`GIF ${index + 1}`}
                                     style={{
                                         position: 'absolute',

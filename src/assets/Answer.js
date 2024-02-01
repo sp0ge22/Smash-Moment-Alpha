@@ -18,6 +18,25 @@ const gameData = [
             tournamentAnswer: 'Genesis',
             yearAnswer: 2022
         },
+
+        {
+            imagePaths: [
+                '/assets/PendingDaily/daily-1.png',
+                '/assets/PendingDaily/daily-2.png',
+                '/assets/PendingDaily/daily-3.png',
+            ],
+
+            gifPaths: [
+                '/assets/PendingDaily/daily-1.gif',
+                '/assets/PendingDaily/daily-2.gif',
+                '/assets/PendingDaily/daily-3.gif',
+            ],
+
+            
+            playerAnswers: ['Westballz', 'Leffen'],
+            tournamentAnswer: 'Beast',
+            yearAnswer: 2022
+        },
         // You can add more objects here for additional sets of images and answers
     ];
     

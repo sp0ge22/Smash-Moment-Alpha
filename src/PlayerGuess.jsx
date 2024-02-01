@@ -4,7 +4,7 @@ import gameData from './assets/Answer';
 import { database } from './firebase'; // Make sure this path is correct
 import { ref, runTransaction } from 'firebase/database';
 
-const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
+const PlayerGuess = ({ setIsBothPlayerAnswersCorrect, currentIndex }) => {
     const [playerInputOne, setPlayerInputOne] = useState('');
     const [playerInputTwo, setPlayerInputTwo] = useState('');
     const [selectedPlayerAnswerOne, setSelectedPlayerAnswerOne] = useState('');
@@ -15,7 +15,7 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect }) => {
     const [animationKeyTwo, setAnimationKeyTwo] = useState(0);
     const [showPlayerListOne, setShowPlayerListOne] = useState(false);
     const [showPlayerListTwo, setShowPlayerListTwo] = useState(false);
-    const { playerAnswers } = gameData[0];
+    const { playerAnswers } = gameData[currentIndex]; // Use currentIndex to access the correct object
     const [wrongAttemptOne, setWrongAttemptOne] = useState(0);
     const [wrongAttemptTwo, setWrongAttemptTwo] = useState(0);
     const playerListOneRef = useRef(null);

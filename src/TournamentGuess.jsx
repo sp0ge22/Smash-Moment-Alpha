@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Tournaments from './assets/Tournaments';
 import gameData from './assets/Answer';
 
-const Tournament = ({ setGlobalTournamentAnswer }) => {
+const Tournament = ({ setGlobalTournamentAnswer, currentIndex }) => {
     const [tournamentInput, setTournamentInput] = useState('');
     const [selectedTournament, setSelectedTournament] = useState('');
     const [isTournamentAnswerCorrect, setIsTournamentAnswerCorrect] = useState(null);
@@ -10,7 +10,7 @@ const Tournament = ({ setGlobalTournamentAnswer }) => {
     const [showTournamentList, setShowTournamentList] = useState(false);
     const [wrongGuessCount, setWrongGuessCount] = useState(0); // Counter for wrong guesses
     const inputRef = useRef(null);
-    const { tournamentAnswer } = gameData[0];
+    const { tournamentAnswer } = gameData[currentIndex];
     const [isHovering, setIsHovering] = useState(false);
     const listRef = useRef(null);
 
