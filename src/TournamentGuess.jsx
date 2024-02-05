@@ -31,6 +31,7 @@ const Tournament = ({ setGlobalTournamentAnswer, currentIndex }) => {
     useEffect(() => {
         if (isTournamentAnswerCorrect === false) {
             const wrongAudio = new Audio('/assets/GameSounds/fox-ahh.wav');
+            wrongAudio.volume = 0.1; // Set volume to half
             wrongAudio.play();
         }
     }, [isTournamentAnswerCorrect, wrongGuessCount]); // Add wrongGuessCount as a dependency
@@ -55,8 +56,10 @@ const Tournament = ({ setGlobalTournamentAnswer, currentIndex }) => {
         if (tournamentAnswer.toLowerCase() === answer.toLowerCase()) { // Compare answers in lowercase
             if (!isTournamentAnswerCorrect) {
                 const audio = new Audio('/assets/GameSounds/fox-shine.wav');
+                audio.volume = 0.1; // Set volume to 0.1
                 audio.play();
                 await new Promise(resolve => setTimeout(resolve, 200)); // Wait 200 milliseconds
+                audio.volume = 0.1; // Set volume to 0.1
                 audio.play();
             }
             setIsTournamentAnswerCorrect(true);

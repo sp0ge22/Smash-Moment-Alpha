@@ -21,6 +21,24 @@ const gameData = [
 
         {
             imagePaths: [
+                '/assets/GameImages/leffen-armada-1.png',
+                '/assets/GameImages/leffen-armada-2.png',
+                '/assets/GameImages/leffen-armada-3.png',
+            ],
+
+            gifPaths: [
+                '/assets/GameImages/leffen-armada-1.gif',
+                '/assets/GameImages/leffen-armada-2.gif',
+                '/assets/GameImages/leffen-armada-3.gif',
+            ],
+
+            
+            playerAnswers: ['Armada', 'Leffen'],
+            tournamentAnswer: 'Beast',
+            yearAnswer: 2022
+        },
+        {
+            imagePaths: [
                 '/assets/PendingDaily/daily-1.png',
                 '/assets/PendingDaily/daily-2.png',
                 '/assets/PendingDaily/daily-3.png',

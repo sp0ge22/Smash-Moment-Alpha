@@ -10,7 +10,7 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gifPat
 
     const borderImagePath = {
         0: '/assets/GameImages/Left_CRT.png',
-        1: '/assets/GameImages/Center_CRT.png',
+        1: '/assets/GameImages/Center_CRT_Stretch.png',
         2: '/assets/GameImages/Right_CRT.png'
     };
 
@@ -67,24 +67,24 @@ const GameImages = ({ isBothPlayerAnswersCorrect, GlobalTournamentAnswer, gifPat
                             }}
                         >
                             <img
-                                className='px-1 pb-12'
+                                className='px-0 pb-0'
                                 src={path}
                                 alt={`Image ${index + 1}`}
                                 style={{ 
-                                    maxWidth: '90%', 
-                                    maxHeight: '90%', 
+                                    width: '425px', 
+                                    height: '425px', 
                                     objectFit: 'contain'
                                 }}
                             />
                             {(hoveredIndex === index || (isBothPlayerAnswersCorrect && GlobalTournamentAnswer)) && (
                                 <img
-                                    className='px-1 pb-12'
+                                    className='px-0 pb-0'
                                     src={localGifPaths[index]}
                                     alt={`GIF ${index + 1}`}
                                     style={{
                                         position: 'absolute',
-                                        maxWidth: '90%', 
-                                        maxHeight: '100%', 
+                                        width: '425px', 
+                                        height: '425px', 
                                         objectFit: 'contain',
                                         pointerEvents: 'none',
                                     }}

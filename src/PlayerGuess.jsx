@@ -46,9 +46,11 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect, currentIndex }) => {
     useEffect(() => {
         if (isPlayerAnswerOneCorrect === true) {
             const correctAudio = new Audio('/assets/GameSounds/fox-shine.wav');
+            correctAudio.volume = 0.1; // Set the volume to 0.5 (half the original volume)
             correctAudio.play();
         } else if (isPlayerAnswerOneCorrect === false) {
             const wrongAudio = new Audio('/assets/GameSounds/fox-ahh.wav');
+            wrongAudio.volume = 0.1; // Set the volume to 0.5 (half the original volume)
             wrongAudio.play();
         }
     }, [isPlayerAnswerOneCorrect, wrongAttemptOne]);
@@ -56,9 +58,11 @@ const PlayerGuess = ({ setIsBothPlayerAnswersCorrect, currentIndex }) => {
     useEffect(() => {
         if (isPlayerAnswerTwoCorrect === true) {
             const correctAudio = new Audio('/assets/GameSounds/fox-shine.wav');
+            correctAudio.volume = 0.1; // Set the volume to 0.5 (half the original volume)
             correctAudio.play();
         } else if (isPlayerAnswerTwoCorrect === false) {
             const wrongAudio = new Audio('/assets/GameSounds/fox-ahh.wav');
+            wrongAudio.volume = 0.1; // Set the volume to 0.5 (half the original volume)
             wrongAudio.play();
         }
     }, [isPlayerAnswerTwoCorrect, wrongAttemptTwo]);
