@@ -74,7 +74,7 @@ export default function App() {
               {/* Player Interaction Question */}
               <div className="mt-5 text-center">
                 <h1 className="text-white text-2xl font-bold shadow-md">
-                  Which two players had this interaction?
+                  Which two players had this moment?
                 </h1>
               </div>
   
@@ -90,7 +90,7 @@ export default function App() {
               {/* Tournament Question */}
               <div className="mt-5 text-center">
                 <h1 className="text-white text-2xl font-bold shadow-lg">
-                  At which tournament series was this interaction?
+                  At which tournament series was this moment?
                 </h1>
               </div>
   
@@ -116,7 +116,7 @@ export default function App() {
               }}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5"
             >
-              Get New Index
+              Load New Moment
             </button>
           </div>
         </div>

@@ -2,25 +2,6 @@
 const gameData = [
         {
             imagePaths: [
-                '/assets/GameImages/Daily-1.jpg',
-                '/assets/GameImages/Daily-2.jpg',
-                '/assets/GameImages/Daily-3.jpg',
-            ],
-
-            gifPaths: [
-                '/assets/GameImages/Daily-1-5mb.gif',
-                '/assets/GameImages/Daily-2-5mb.gif',
-                '/assets/GameImages/Daily-3-5mb.gif',
-            ],
-
-            
-            playerAnswers: ['Mang0', 'Plup'],
-            tournamentAnswer: 'Genesis',
-            yearAnswer: 2022
-        },
-
-        {
-            imagePaths: [
                 '/assets/GameImages/leffen-armada-1.png',
                 '/assets/GameImages/leffen-armada-2.png',
                 '/assets/GameImages/leffen-armada-3.png',
@@ -39,20 +20,38 @@ const gameData = [
         },
         {
             imagePaths: [
-                '/assets/PendingDaily/daily-1.png',
-                '/assets/PendingDaily/daily-2.png',
-                '/assets/PendingDaily/daily-3.png',
+                '/assets/GameImages/none-ibdw-1.png',
+                '/assets/GameImages/none-ibdw-2.png',
+                '/assets/GameImages/none-ibdw-3.png',
             ],
 
             gifPaths: [
-                '/assets/PendingDaily/daily-1.gif',
-                '/assets/PendingDaily/daily-2.gif',
-                '/assets/PendingDaily/daily-3.gif',
+                '/assets/GameImages/none-ibdw-1.gif',
+                '/assets/GameImages/none-ibdw-2.gif',
+                '/assets/GameImages/none-ibdw-3.gif',
             ],
 
             
-            playerAnswers: ['Westballz', 'Leffen'],
-            tournamentAnswer: 'Beast',
+            playerAnswers: ['n0ne', 'ibdw'],
+            tournamentAnswer: 'Super Smash Con',
+            yearAnswer: 2022
+        },
+        {
+            imagePaths: [
+                '/assets/GameImages/none-abate-1.png',
+                '/assets/GameImages/none-abate-2.png',
+                '/assets/GameImages/none-abate-3.png',
+            ],
+
+            gifPaths: [
+                '/assets/GameImages/none-abate-1.gif',
+                '/assets/GameImages/none-abate-2.gif',
+                '/assets/GameImages/none-abate-3.gif ',
+            ],
+
+            
+            playerAnswers: ['s2j', 'abate'],
+            tournamentAnswer: 'The Big House',
             yearAnswer: 2022
         },
         // You can add more objects here for additional sets of images and answers
