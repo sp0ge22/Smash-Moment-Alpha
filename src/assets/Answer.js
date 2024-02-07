@@ -107,8 +107,8 @@ const gameData = [
             ],
 
             
-            playerAnswers: ['mang0', 'leffen'],
-            tournamentAnswer: 'Apex',
+            playerAnswers: ['armada', 'plup'],
+            tournamentAnswer: 'Genesis',
             yearAnswer: 2022
         },
 
@@ -128,6 +128,44 @@ const gameData = [
             
             playerAnswers: ['mang0', 'zain'],
             tournamentAnswer: 'Summit',
+            yearAnswer: 2022
+        },
+
+        {
+            imagePaths: [
+                '/assets/GameImages/westballz-leffen-1.png',
+                '/assets/GameImages/westballz-leffen-2.png',
+                '/assets/GameImages/westballz-leffen-3.png',
+            ],
+
+            gifPaths: [
+                '/assets/GameImages/westballz-leffen-1.gif',
+                '/assets/GameImages/westballz-leffen-2.gif',
+                '/assets/GameImages/westballz-leffen-3.gif',
+            ],
+
+            
+            playerAnswers: ['westballz', 'leffen'],
+            tournamentAnswer: 'Beast',
+            yearAnswer: 2022
+        },
+
+        {
+            imagePaths: [
+                '/assets/GameImages/n0ne-hungrybox-1.png',
+                '/assets/GameImages/n0ne-hungrybox-2.png',
+                '/assets/GameImages/n0ne-hungrybox-3.png',
+            ],
+
+            gifPaths: [
+                '/assets/GameImages/n0ne-hungrybox-1.gif',
+                '/assets/GameImages/n0ne-hungrybox-2.gif',
+                '/assets/GameImages/n0ne-hungrybox-3.gif',
+            ],
+
+            
+            playerAnswers: ['n0ne', 'hungrybox'],
+            tournamentAnswer: 'Genesis',
             yearAnswer: 2022
         },
         // You can add more objects here for additional sets of images and answers
