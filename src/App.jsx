@@ -11,6 +11,7 @@ export default function App() {
   const logoSrc = '/assets/GameImages/AMIM-Header.gif';
   const backgroundSrc = '/assets/GameImages/background2.gif';
   const discordSrc = '/assets/GameImages/discord.png';
+  const buttonSrc = '/assets/GameImages/Next-moment-button.png';
   const [isBothPlayerAnswersCorrect, setIsBothPlayerAnswersCorrect] = useState(null);
   const [GlobalTournamentAnswer, setGlobalTournamentAnswer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(Math.floor(Math.random() * gameData.length));
@@ -29,7 +30,7 @@ export default function App() {
   
   return (
     <div
-      className="relative h-screen mx-auto"
+      className="relative h-screen mx-auto flex items-center justify-center"
       style={{
         backgroundImage: `url(${backgroundSrc})`,
         backgroundSize: 'cover',
@@ -59,13 +60,13 @@ export default function App() {
           </div>
   
           {/* Main Guessing Field with Discord Icon and New Index Button */}
-          <div className="flex items-center justify-center w-full">
+          <div className="flex flex-row items-center justify-center">
             {/* Discord Logo */}
-            <a href="https://discord.gg/c3taXNgV" className="mr-5">
+            <a href="https://discord.gg/c3taXNgV" className="flex items-center justify-center">
               <img
                 src={discordSrc}
                 alt="Discord Logo"
-                style={{ width: '50px' }}
+                style={{ width: '100px' }}
               />
             </a>
   
@@ -105,20 +106,24 @@ export default function App() {
             </div>
   
             {/* New Index Button */}
-            <button
-              onClick={() => {
-                const newIndex = currentIndex + 1;
-                setCurrentIndex(newIndex >= gameData.length ? 0 : newIndex);
-                resetPlayerGuess();
-                resetTournamentGuess();
-                setIsBothPlayerAnswersCorrect(null);
-                setGlobalTournamentAnswer(null);
-              }}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5"
-            >
-              Load New Moment
-            </button>
-          </div>
+              <a
+                onClick={() => {
+                  const newIndex = currentIndex + 1;
+                  setCurrentIndex(newIndex >= gameData.length ? 0 : newIndex);
+                  resetPlayerGuess();
+                  resetTournamentGuess();
+                  setIsBothPlayerAnswersCorrect(null);
+                  setGlobalTournamentAnswer(null);
+                }}
+              >
+                <img
+                  src={buttonSrc}
+                  alt="Load New Moment"
+                  className="cursor-pointer hover:opacity-80 transition duration-300 ease-in-out"
+                  style={{ width: '100px' }}
+                />
+              </a>
+            </div>
         </div>
   
         {/* Congrats Component */}
@@ -136,5 +141,5 @@ export default function App() {
         </div>
       </div>
     </div>
-  );
-}  
+  );}
+
