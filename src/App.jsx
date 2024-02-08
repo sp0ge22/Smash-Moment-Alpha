@@ -11,15 +11,16 @@ export default function App() {
   const logoSrc = '/assets/GameImages/AMIM-Header.gif';
   const backgroundSrc = '/assets/GameImages/background2.gif';
   const discordSrc = '/assets/GameImages/discord.png';
-  const buttonSrc = '/assets/GameImages/Next-moment-button.png';
+  const buttonSrc = '/assets/GameImages/Load-New-Moment.png';
+  const button1Src = '/assets/GameImages/Load-New-Moment.gif';
   const [isBothPlayerAnswersCorrect, setIsBothPlayerAnswersCorrect] = useState(null);
   const [GlobalTournamentAnswer, setGlobalTournamentAnswer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(Math.floor(Math.random() * gameData.length));
   const [gifPaths, setGifPaths] = useState(gameData[currentIndex].gifPaths);
   const [playerGuessKey, setPlayerGuessKey] = useState(0); // New key state for PlayerGuess component
   const [tournamentGuessKey, setTournamentGuessKey] = useState(0); // Key for TournamentGuess
+  const [isHovered, setIsHovered] = useState(false);
 
-  
   function resetPlayerGuess() {
     setPlayerGuessKey(prevKey => prevKey + 1); // Increment key to force remount of PlayerGuess
   }
@@ -106,24 +107,26 @@ export default function App() {
             </div>
   
             {/* New Index Button */}
-              <a
-                onClick={() => {
-                  const newIndex = currentIndex + 1;
-                  setCurrentIndex(newIndex >= gameData.length ? 0 : newIndex);
-                  resetPlayerGuess();
-                  resetTournamentGuess();
-                  setIsBothPlayerAnswersCorrect(null);
-                  setGlobalTournamentAnswer(null);
-                }}
-              >
-                <img
-                  src={buttonSrc}
-                  alt="Load New Moment"
-                  className="cursor-pointer hover:opacity-80 transition duration-300 ease-in-out"
-                  style={{ width: '100px' }}
-                />
-              </a>
-            </div>
+            <a
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={() => {
+                const newIndex = currentIndex + 1;
+                setCurrentIndex(newIndex >= gameData.length ? 0 : newIndex);
+                resetPlayerGuess();
+                resetTournamentGuess();
+                setIsBothPlayerAnswersCorrect(null);
+                setGlobalTournamentAnswer(null);
+              }}
+            >
+              <img
+                src={isHovered ? button1Src : buttonSrc}
+                alt="Load New Moment"
+                className="cursor-pointer"
+                style={{ width: '200px' }}
+            />
+            </a>
+          </div>
         </div>
   
         {/* Congrats Component */}
