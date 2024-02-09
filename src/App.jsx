@@ -63,7 +63,7 @@ export default function App() {
           {/* Main Guessing Field with Discord Icon and New Index Button */}
           <div className="flex flex-row items-center justify-center">
             {/* Discord Logo */}
-            <a href="https://discord.gg/c3taXNgV" className="flex items-center justify-center">
+            <a href="https://discord.gg/s4SHkyBNAW" className="flex items-center justify-center">
               <img
                 src={discordSrc}
                 alt="Discord Logo"
